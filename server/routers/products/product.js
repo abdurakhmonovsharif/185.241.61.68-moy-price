@@ -983,7 +983,6 @@ module.exports.getProducts = async (req, res) => {
     const { market, currentPage, countPage, search, filialId } = req.body;
     const id = filialId || market;
     const marke = await Market.findById(id);
-console.log("salom");
     if (!marke) {
       return res
         .status(401)
@@ -1036,7 +1035,7 @@ console.log("salom");
   }
 };
 module.exports.getProductNotArchive=async(req,res)=>{
-  
+
 }
 module.exports.getPartnerProducts = async (req, res) => {
   try {
