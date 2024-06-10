@@ -48,7 +48,7 @@ import {getBarcode} from '../../Barcode/barcodeSlice.js'
 import {getCurrency} from '../../Currency/currencySlice.js'
 import {useTranslation} from 'react-i18next'
 import {filter, map} from 'lodash'
-import {getAllProducts} from '../../Sale/Slices/registerSellingSlice.js'
+import {getAllProducts, getProductNotArchive} from '../../Sale/Slices/registerSellingSlice.js'
 import {FaFilter} from 'react-icons/fa'
 import TableMobile from '../../../Components/Table/TableMobile.js'
 import SelectForm from '../../../Components/Select/SelectForm.js'
@@ -520,9 +520,20 @@ function Products() {
                 }
                 dispatch(addProduct(body)).then(({error}) => {
                     if (!error) {
+                        const body = {
+                            currentPage,
+                            countPage: showByTotal,
+                            search: {
+                                name: searchByName.replace(/\s+/g, ' ').trim(),
+                                code: searchByCode.replace(/\s+/g, ' ').trim(),
+                                category: searchByCategory
+                                    .replace(/\s+/g, ' ')
+                                    .trim(),
+                            },
+                        }
+                        dispatch(getProducts(body))
                         clearForm()
                         handleClickCancelToImport()
-                        dispatch(getAllProducts())
                     }
                 })
             }

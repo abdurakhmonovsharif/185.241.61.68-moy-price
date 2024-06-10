@@ -61,6 +61,9 @@ router.post("/product/getall", auth, (req, res) => {
 router.post("/product/getproducts", auth, (req, res) => {
   require("./product").getProducts(req, res);
 });
+router.post("/product/getProductNotArchive", auth, (req, res) => {
+  require("./product").getProductNotArchive(req, res);
+});
 
 router.post("/product/getpartnerproducts", auth, (req, res) => {
   require("./product").getPartnerProducts(req, res);

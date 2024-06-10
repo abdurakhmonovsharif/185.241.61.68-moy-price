@@ -13,6 +13,17 @@ export const getAllProducts = createAsyncThunk(
         }
     }
 )
+export const getProductNotArchive = createAsyncThunk(
+    'registerSelling/getProductNotArchive',
+    async (body = {}, {rejectWithValue}) => {
+        try {
+            const {data} = await Api.post('/products/product/getProductsNotArchive')
+            return data
+        } catch (error) {
+            return rejectWithValue(error)
+        }
+    }
+)
 
 export const getClients = createAsyncThunk(
     'registerSelling/getClients',

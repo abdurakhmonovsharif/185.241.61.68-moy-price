@@ -252,6 +252,7 @@ module.exports.register = async (req, res) => {
       tradeprice,
       tradepriceuzs,
       minimumcount,
+      width
     } = req.body.product;
     const marke = await Market.findById(market);
 
@@ -315,6 +316,7 @@ module.exports.register = async (req, res) => {
       category,
       market,
       unit,
+      width,
       minimumcount,
       total: Math.round(total * 100) / 100,
     });
@@ -490,7 +492,7 @@ module.exports.register = async (req, res) => {
       market,
     })
       .sort({ code: -1 })
-      .select("total market category minimumcount")
+      .select("total market category minimumcount width")
       .populate(
         "price",
         "incomingprice sellingprice incomingpriceuzs sellingpriceuzs tradeprice tradepriceuzs"
@@ -1033,7 +1035,9 @@ console.log("salom");
     res.status(401).send(error);
   }
 };
-
+module.exports.getProductNotArchive=async(req,res)=>{
+  
+}
 module.exports.getPartnerProducts = async (req, res) => {
   try {
     const { market, currentPage, countPage, search, partner } = req.body;
@@ -1056,7 +1060,7 @@ module.exports.getPartnerProducts = async (req, res) => {
       connections: market,
     })
       .sort({ code: 1 })
-      .select("total market category minimumcount connections")
+      .select("total market category minimumcount width connections")
       .populate(
         "price",
         "incomingprice sellingprice incomingpriceuzs sellingpriceuzs tradeprice tradepriceuzs"
@@ -1161,7 +1165,7 @@ module.exports.getProductExcel = async (req, res) => {
       isArchive: false
     })
       .sort({ _id: -1 })
-      .select("total unit price productdata category minimumcount")
+      .select("total unit price productdata width category minimumcount")
       .populate(
         "price",
         "incomingprice sellingprice incomingpriceuzs sellingpriceuzs tradeprice tradepriceuzs"
@@ -1206,7 +1210,7 @@ module.exports.getAllIncoming = async (req, res) => {
       isArchive: false
     })
       .sort({ code: 1 })
-      .select("total market category")
+      .select("total market category width")
       .populate(
         "price",
         "incomingprice sellingprice incomingpriceuzs sellingpriceuzs"
@@ -1247,7 +1251,7 @@ module.exports.getAllType = async (req, res) => {
       producttype: typeid,
     })
       .sort({ _id: -1 })
-      .select("name code unit category price total")
+      .select("name code unit width category price total")
       .populate("category", "name code")
       .populate("unit", "name")
       .populate("price", "sellingprice");
@@ -1276,7 +1280,7 @@ module.exports.getAllBrand = async (req, res) => {
 
       brand: typeid,
     })
-      .select("name code category producttype price unit total")
+      .select("name code category width producttype price unit total")
       .populate("category", "code")
       .populate("producttype", "name")
       .populate("price", "sellingprice")
@@ -1306,7 +1310,7 @@ module.exports.getAllCategory = async (req, res) => {
       isArchive: false
     })
       .sort({ code: -1 })
-      .select("unit category price total")
+      .select("unit category width price total")
       .populate("productdata", "name code barcode")
       .populate("category", "name code")
       .populate("unit", "name")
@@ -1413,7 +1417,7 @@ module.exports.getProductsInventory = async (req, res) => {
       market,
     })
       .sort({ code: 1 })
-      .select("total market category")
+      .select("total market width category")
       .populate("price", "incomingprice sellingprice")
       .populate({
         path: "productdata",
@@ -1451,7 +1455,7 @@ module.exports.getproductsale = async (req, res) => {
       market,
     })
       .sort({ timestamp: -1 })
-      .select("market total")
+      .select("market total width")
       .populate("productdata", "name code barcode")
       .populate(
         "price",

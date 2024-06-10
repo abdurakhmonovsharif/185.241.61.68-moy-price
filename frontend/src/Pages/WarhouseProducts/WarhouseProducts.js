@@ -126,13 +126,13 @@ const WarhouseProducts = () => {
                         value={startDate}
                         onChange={setStartDate}
                         placeholder={'01.01.2021'}
-                        maxWidth={'w-[6.625rem]'}
+                        maxWidth={'w-[7.625rem]'}
                     />
                     <Dates
                         value={endDate}
                         onChange={setEndDate}
                         placeholder={'01.01.2021'}
-                        maxWidth={'w-[6.625rem]'}
+                        maxWidth={'w-[7.625rem]'}
                     />
 
             </div>}
