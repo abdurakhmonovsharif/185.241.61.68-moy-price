@@ -1,5 +1,7 @@
-Store Management Application
-Overview
+**Store Management Application**
+
+**Overview**
+
 This is a full stack web application designed to manage store operations including product input and output, sales, customer loans, and discounts. The application is built using React.js and Chakra UI for the frontend, with a backend powered by Node.js, Express.js, and MongoDB.
 
 Features
